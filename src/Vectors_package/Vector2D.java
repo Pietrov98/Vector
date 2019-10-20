@@ -38,7 +38,7 @@ public class Vector2D implements IVector{
 	
 	public double getAngle()
 	{
-		return Math.acos(this.vx / getAbs());
+		return Math.acos(this.vx / getAbs()) * (180/Math.PI);
 	}
 
 }
