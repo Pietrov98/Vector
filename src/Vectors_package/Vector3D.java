@@ -14,11 +14,13 @@ public class Vector3D extends Vector2D {
 	}
 	public double getAbs()
 	{
-		return 0;
+		return Math.abs(Math.sqrt((Math.pow(this.getVx(), 2) + Math.pow(this.getVy(), 2)) + Math.pow(this.vz, 2)));
 	}
+	
 	
 	public double get2Angle()
 	{
-		return 0;
+		double angle = Math.acos(this.getVy() / getAbs());
+		return angle;
 	}
 }

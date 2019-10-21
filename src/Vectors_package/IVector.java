@@ -7,18 +7,23 @@ public interface IVector {
 	public double getAngle();
 	public void setVx(double vx);
 	public void setVy(double vy);
-	public static IVector scalarProduct(IVector a, IVector b) //to chyba ma byc double
+	public static double scalarProduct(IVector a, IVector b) //to chyba ma byc double
 	{
 		//System.out.println(b.getAbs() + " " + b.getAngle());
 		//System.out.println(Math.acos(a.getAngle()));
-		if(a instanceof Vector2D)
+		double scalar = 0;
+		if(a instanceof Vector3D)
 		{
-			double cos_angle = Math.cos(a.getAngle()) * Math.cos(b.getAngle()) + Math.sin(a.getAngle()) * Math.sin(b.getAngle());
-			double scalar = a.getAbs() * b.getAbs() * cos_angle;
-			System.out.println("Iloczyn skalarany to " + scalar);
+			scalar = a.getVx() * b.getVx() + a.getVy() * b.getVy() + ((Vector3D) a).getVz() * ((Vector3D) b).getVz();
+		}
+		else
+		{//1.2
+			//double cos_angle = Math.cos(b.getAngle() - a.getAngle());//Math.cos(a.getAngle()) * Math.cos(b.getAngle()) + Math.sin(a.getAngle()) * Math.sin(b.getAngle());
+			//System.out.println(cos_angle);
+			scalar = a.getVx() * b.getVx() + a.getVy() * b.getVy();	
 		}
 		
-		return null;
+		return scalar;
 	}
 	public static IVector vectorProduct(IVector a, IVector b) //to chyba ma byc double
 	{
