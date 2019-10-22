@@ -23,8 +23,9 @@ public class UserInterface {
 							 + "2.Usun wektor\n"
 							 + "3.Iloczyn skalarny\n"
 							 + "4.Iloczyn wektorowy\n"
-							 + "5.Lista wektorow\n" 
-							 + "6.Zapisz wektory do pliku");
+							 + "5.Dodaj wektory\n"
+							 + "6.Lista wektorow\n" 
+							 + "7.Zapisz wektory do pliku");
 			@SuppressWarnings("resource")
 			int choice = in.nextInt();
 			
@@ -42,14 +43,12 @@ public class UserInterface {
 					Vector2D obj = new Vector2D();
 					obj.setVx(vx);
 					obj.setVy(vy);
-					System.out.println(vx + " " + vy);
 					vecRepo.addVector(obj);
 				}
 				else if(choice == 2)
 				{
 					double vz;
 					Vector3D obj = new Vector3D();
-					//System.out.println("Podaj parametry wektora 3D: ");
 					vz = in.nextDouble();
 					obj.setVx(vx);
 					obj.setVy(vy);
@@ -197,9 +196,62 @@ public class UserInterface {
 			}
 			else if(choice == 5)
 			{
-				PrintList.printVectorList(vecRepo.getList());
+				List<Double> v1 = new ArrayList<Double>();
+				List<Double> v2 = new ArrayList<Double>();
+				choice = -1;
+				System.out.println("1.Wektor 2D\n2.Wektor 3D");
+				choice = in.nextInt();
+				double vx, vy;
+				System.out.println("Podaj parametry wektora, ktory chcesz wybrac: ");
+				v1.add(in.nextDouble());
+				v1.add(in.nextDouble());
+				if(choice == 1)
+				{
+					v1.add(null);
+					if(vecRepo.getVector(v1) != null)
+					{
+						System.out.println("Podaj parametry wektora, ktory chcesz wybrac: ");
+						v2.add(in.nextDouble());
+						v2.add(in.nextDouble());
+						v2.add(null);
+						if(vecRepo.getVector(v2) != null)
+						{
+							Vector2D vec = (Vector2D) IVector.addVector(vecRepo.getVector(v1), vecRepo.getVector(v2));
+							System.out.println("Suma wektorow to [" + vec.getVx() + ", " + vec.getVy() + "]\n");
+						}
+						else
+							System.out.println("Brak podanego wektora");
+					}
+					else
+						System.out.println("Brak podanego wektora");
+				}
+				else if(choice == 2)
+				{
+					double vz;
+					v1.add(in.nextDouble());
+					if(vecRepo.getVector(v1) != null)
+					{
+						System.out.println("Podaj parametry wektora, ktory chcesz wybrac: ");
+						v2.add(in.nextDouble());
+						v2.add(in.nextDouble());
+						v2.add(in.nextDouble());
+						if(vecRepo.getVector(v2) != null)
+						{
+							Vector3D vec = (Vector3D) IVector.addVector(vecRepo.getVector(v1), vecRepo.getVector(v2));
+							System.out.println("Suma wektorow to [" + vec.getVx() + ", " + vec.getVy() + ", " + vec.getVz() + "]\n");
+						}
+						else
+							System.out.println("Brak podanego wektora");
+					}
+					else
+						System.out.println("Brak podanego wektora");
+				}
 			}
 			else if(choice == 6)
+			{
+				PrintList.printVectorList(vecRepo.getList());
+			}
+			else if(choice == 7)
 			{
 				
 				XMLWriter.writeToXml(vecRepo.getList());

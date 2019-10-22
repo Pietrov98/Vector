@@ -41,4 +41,26 @@ public interface IVector {
 		}
 		return vec;
 	}
+	
+	public static IVector addVector(IVector a, IVector b)
+	{
+		
+		if(a instanceof Vector3D)
+		{
+			Vector3D vec = new Vector3D();
+			vec.setVx(a.getVx() + b.getVx());
+			vec.setVy(a.getVy() + b.getVy());
+			((Vector3D) vec).setVz(((Vector3D) a).getVz() + ((Vector3D)b).getVz());
+			return vec;
+		}
+		else
+		{
+			Vector2D vec = new Vector3D();
+			vec.setVx(a.getVx() + b.getVx());
+			vec.setVy(a.getVy() + b.getVy());
+			return vec;
+		}
+		
+		
+	}
 }
